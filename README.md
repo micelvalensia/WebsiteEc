@@ -54,5 +54,14 @@ dan masukkan file db ke database kalian
 
 ## 📸 Preview Tampilan
 
+### Halaman Home
+![Home](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/home.png)
 
+### Halaman Pemesanan
+![menu](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/menu.png)
 
+### Halaman Cart
+![cart](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/cart.png)
+
+### Halaman Dashboard Admin
+![dashboard](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/dashboard.png)
