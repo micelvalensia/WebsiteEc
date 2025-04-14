@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@theme{
+    --cancut: red;
+    --animate-marquee: marque 25s linear infinite;
+    --animate-marquee2: marque2 25s linear infinite;
+
+    @keyframes marque{
+        0%{
+            transform: translateX(0%);
+          }
+        100%{
+            transform: translateX(-100%);
+        }
+    }
+
+    @keyframes marque2{
+        0%{
+            transform: translateX(100%);
+          }
+        100%{
+            transform: translateX(0%);
+        }
+    }
+}
+
+:root{
+    font-family: 'Poppins', 'sans-serif' ;
+    background-color: #f8f8f8;
+}
+
+.anjay{
+    scrollbar-width: none;
+}
+
+
+
