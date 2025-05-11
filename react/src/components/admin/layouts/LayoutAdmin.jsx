@@ -4,10 +4,6 @@ import TopBar from '../Topbar'
 import { useEffect } from 'react'
 
 function LayoutAdmin({children, activePage}) {
-  useEffect(() => {
-    console.log("LayoutAdmin menerima:", activePage);
-
-  }, [])
   return (
     <>
     <div className="grid grid-cols-[auto_1fr] bg-[#f8f8f8] min-h-screen">

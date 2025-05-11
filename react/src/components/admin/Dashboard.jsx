@@ -36,10 +36,6 @@ const Dashboard = () => {
       })
   }
 
-  useEffect(() => {
-    console.log("Render Page: dashboard");
-  }, [])
-
   if (loading) return <Loading />
 
   return (

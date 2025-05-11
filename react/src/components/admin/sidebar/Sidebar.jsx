@@ -7,10 +7,6 @@ export default function Sidebar({ active }) {
   const [collapsed, setCollapsed] = useState(false);
   const toggleSidebar = () => setCollapsed(prev => !prev);
 
-  useEffect(() => {
-    console.log("Sidebar menerima:", active);
-  }, [active]);
-
   return (
     <div className={`${collapsed ? 'w-[70px]' : 'w-[300px]'} sticky top-0 z-100 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300`}>
       {/* Logo + Toggle */}
