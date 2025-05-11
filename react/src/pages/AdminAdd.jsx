@@ -51,7 +51,7 @@ const AdminAdd = () => {
     
 
   return (
-    <LayoutAdmin>
+    <LayoutAdmin activePage={'add'}>
         <div className="w-full min-h-screen p-10">
             <div className="flex justify-between">
                 <h2 className='font-medium text-2xl'>Tambah Menu</h2>

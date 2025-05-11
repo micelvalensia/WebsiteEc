@@ -13,7 +13,7 @@ function AdminHistory() {
   if (!isAuthenticated) return navigate("/admin/login");
    
   return (
-     <LayoutAdmin>
+     <LayoutAdmin activePage={'history'}>
         <div className="p-10 w-full min-h-screen">
             <History />
         </div>

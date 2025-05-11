@@ -32,5 +32,6 @@
     scrollbar-width: none;
 }
 
-
-
+/* .sidebarGrid{
+    grid-template-columns: auto 1fr;
+} */

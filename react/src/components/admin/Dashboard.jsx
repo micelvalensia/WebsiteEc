@@ -36,10 +36,14 @@ const Dashboard = () => {
       })
   }
 
+  useEffect(() => {
+    console.log("Render Page: dashboard");
+  }, [])
+
   if (loading) return <Loading />
 
   return (
-    <LayoutAdmin>
+    <LayoutAdmin activePage={'dashboard'}>
       <div className="w-full min-h-screen p-6 md:p-10">
         <div className="flex justify-between items-center mb-4">
           <h2 className='font-semibold text-2xl'>📋 List Menu</h2>

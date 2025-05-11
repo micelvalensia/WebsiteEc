@@ -1,15 +1,20 @@
 import React from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import TopBar from '../Topbar'
+import { useEffect } from 'react'
 
-function LayoutAdmin({children}) {
+function LayoutAdmin({children, activePage}) {
+  useEffect(() => {
+    console.log("LayoutAdmin menerima:", activePage);
+
+  }, [])
   return (
     <>
-    <div className='flex bg-[#f8f8f8]'>
-      <Sidebar />
-      <div className="flex flex-col w-[80%] ml-auto">
+    <div className="grid grid-cols-[auto_1fr] bg-[#f8f8f8] min-h-screen">
+      <Sidebar active={activePage} />
+      <div className="flex flex-col w-full">
         <TopBar />
-        <div className="pt-10">
+        <div>
           {children}
         </div>
       </div>

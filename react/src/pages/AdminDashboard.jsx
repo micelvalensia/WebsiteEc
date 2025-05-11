@@ -4,7 +4,7 @@ import AdminHome from "../components/admin/AdminHome";
 
 function AdminDashboard() {
   return (
-    <LayoutAdmin>
+    <LayoutAdmin activePage={'index'}>
       <AdminHome />
     </LayoutAdmin>
   );
