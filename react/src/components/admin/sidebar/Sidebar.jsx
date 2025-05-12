@@ -54,7 +54,7 @@ export default function Sidebar({ active }) {
           <li className={`mb-1 ${active === 'dashboard' ? 'bg-blue-400 rounded-xl' : ''}`}>
             <Link
               to="/admin/crud"
-              className={`flex items-center w-full ${collapsed ? '' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'dashboard' ? '' : 'hover:bg-gray-100'}`}
+              className={`flex items-center w-full ${collapsed ? 'py-2 text-center' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'dashboard' ? '' : 'hover:bg-gray-100'}`}
             >
               <ClipboardList size={20} className={`mr-3 text-gray-600 ${collapsed ? 'ml-3' : ''}`} />
               {!collapsed && <span className="flex-1 whitespace-nowrap">List Data</span>}
@@ -64,7 +64,7 @@ export default function Sidebar({ active }) {
           <li className={`mb-1 ${active === 'add' ? 'bg-blue-400 rounded-xl' : ''}`}>
             <Link
               to="/admin/add"
-              className={`flex items-center w-full ${collapsed ? '' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'add' ? '' : 'hover:bg-gray-100'}`}
+              className={`flex items-center w-full ${collapsed ? 'py-2 text-center' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'add' ? '' : 'hover:bg-gray-100'}`}
             >
               <Calendar size={20} className={`mr-3 text-gray-600 ${collapsed ? 'ml-3' : ''}`} />
               {!collapsed && <span className="flex-1 whitespace-nowrap">Tambah Data</span>}
@@ -74,7 +74,7 @@ export default function Sidebar({ active }) {
           <li className={`mb-1 ${active === 'history' ? 'bg-blue-400 rounded-xl' : ''}`}>
             <Link
               to="/admin/history"
-              className={`flex items-center w-full ${collapsed ? '' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'history' ? '' : 'hover:bg-gray-100'}`}
+              className={`flex items-center w-full ${collapsed ? 'py-2 text-center' : 'px-3 py-2'} text-gray-700 rounded-md ${active === 'history' ? '' : 'hover:bg-gray-100'}`}
             >
               <User size={20} className={`mr-3 text-gray-600 ${collapsed ? 'ml-3' : ''}`} />
               {!collapsed && <span className="flex-1 whitespace-nowrap">Riwayat Pembelian</span>}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getHistory } from "./function/Function";
+import { getHistory } from "./api/history";
 
 function History() {
   const [list, setList] = useState([]);
@@ -10,36 +10,38 @@ function History() {
   }, []);
 
   const handleDate = (e) => {
-    const rawDate = e.target.value
+    const rawDate = e.target.value;
     const date = new Date(rawDate);
 
     const formatted = date.toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-  
-      setFormattedDate(formatted);
-  }
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+
+    setFormattedDate(formatted);
+  };
 
   const filteredList = list.filter((item) => {
-    if(formattedDate === ""){
-        return list
-    }else{ 
-        const itemDate = item.create_at === formattedDate
-        return itemDate
+    if (formattedDate === "") {
+      return list;
+    } else {
+      const itemDate = item.create_at === formattedDate;
+      return itemDate;
     }
-  })
+  });
 
   return (
     <>
       <div className="flex justify-between items-center">
         <h2 className="font-medium text-2xl">Payment History</h2>
         <div className="flex gap-5">
-          <button 
-          className="bg-blue-600 hover:bg-blue-800 p-1 px-3 rounded-xl text-white cursor-pointer"
-          onClick={() => setFormattedDate("")}
-          >All data</button>
+          <button
+            className="bg-blue-600 hover:bg-blue-800 p-1 px-3 rounded-xl text-white cursor-pointer"
+            onClick={() => setFormattedDate("")}
+          >
+            All data
+          </button>
           <input
             type="date"
             name="waktu"

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useAuth } from '../components/admin/function/Function.jsx'
+import { useAuth } from '../components/admin/api/useAuth.js';
 import { useNavigate } from 'react-router';
 import Dashboard from '../components/admin/Dashboard.jsx';
 import Loading from '../components/loading/Loading.jsx';

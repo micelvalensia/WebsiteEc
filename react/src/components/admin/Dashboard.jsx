@@ -1,51 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import LayoutAdmin from './layouts/LayoutAdmin'
-import { Link } from 'react-router'
-import axios from 'axios'
-import { money } from './function/Function'
-import Loading from '../loading/Loading'
-import Swal from 'sweetalert2'
+import React, { useEffect, useState } from "react";
+import LayoutAdmin from "./layouts/LayoutAdmin";
+import { Link } from "react-router";
+import axios from "axios";
+import { money } from "./function/Function";
+import Loading from "../loading/Loading";
+import { handleDelete } from "./api/delete_food";
+import { getFoods } from "./api/menu";
 
 const Dashboard = () => {
-  const [list, setList] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:8092/getfood')
-      .then((res) => setList(res.data.data))
-      .catch((err) => console.log(err))
-  }, [])
+    const fetchFoods = async () => {
+      try {
+        const data = await getFoods();
+        setList(data);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        alert("Terjadi kesalahan saat mengupload menu.");
+      }
+    };
 
-  const handleDelete = (id) => {
-    setList((prev) => prev.filter(item => item.id !== id))
-    setLoading(true)
-    axios.post(`http://localhost:8092/delete/${id}`)
-      .then((res) => {
-        setLoading(false)
-        Swal.fire({
-          title: 'Data terhapus!',
-          text: "Data yang anda pilih berhasil dihapus",
-          icon: "success",
-          timer: 3000,
-          showConfirmButton: false
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
-  }
+    fetchFoods();
+  }, []);
 
-  if (loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
-    <LayoutAdmin activePage={'dashboard'}>
+    <LayoutAdmin activePage={"dashboard"}>
       <div className="w-full min-h-screen p-6 md:p-10">
         <div className="flex justify-between items-center mb-4">
-          <h2 className='font-semibold text-2xl'>📋 List Menu</h2>
+          <h2 className="font-semibold text-2xl">📋 List Menu</h2>
           <Link
             to="/admin/add"
-            className='bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition'
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition"
           >
             + Tambah Data
           </Link>
@@ -67,7 +56,9 @@ const Dashboard = () => {
                   <tr key={item.id} className="hover:bg-gray-50 text-sm">
                     <td className="px-6 py-3 border-b">{index + 1}</td>
                     <td className="px-6 py-3 border-b">{item.makanan}</td>
-                    <td className="px-6 py-3 border-b">Rp{money(item.harga)}</td>
+                    <td className="px-6 py-3 border-b">
+                      Rp{money(item.harga)}
+                    </td>
                     <td className="px-6 py-3 border-b">
                       <img
                         src={`http://localhost:8092/${item.gambar}`}
@@ -83,7 +74,9 @@ const Dashboard = () => {
                         Edit
                       </Link>
                       <button
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() =>
+                          handleDelete(item.id, setList, setLoading)
+                        } // Memanggil handleDelete
                         className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded-md"
                       >
                         Delete
@@ -103,7 +96,7 @@ const Dashboard = () => {
         </div>
       </div>
     </LayoutAdmin>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

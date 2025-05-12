@@ -1,6 +1,6 @@
 import React from 'react'
 import LayoutAdmin from '../components/admin/layouts/LayoutAdmin'
-import { useAuth } from '../components/admin/function/Function';
+import { useAuth } from '../components/admin/api/useAuth';
 import Loading from '../components/loading/Loading';
 import { useNavigate } from 'react-router';
 import History from '../components/admin/history';

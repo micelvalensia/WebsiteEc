@@ -11,7 +11,7 @@ import AdminAdd from './pages/AdminAdd.jsx'
 import { ListProvider, MenuProvider } from './components/context/MenuContext.jsx'
 import AdminHistory from './pages/AdminHistory.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
-import EditMakanan from './components/admin/EditMakanan.jsx'
+import AdminEdit from './pages/AdminEdit.jsx'
 
 createRoot(document.getElementById('root')).render(
   <ListProvider>
@@ -29,7 +29,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/admin/add' element={<AdminAdd />} />
           <Route path='/admin/history' element={<AdminHistory />} />
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
-          <Route path='/admin/edit/:id' element={<EditMakanan />} />
+          <Route path='/admin/edit/:id' element={<AdminEdit />} />
       </Routes>
     </BrowserRouter>
   </ListProvider>
