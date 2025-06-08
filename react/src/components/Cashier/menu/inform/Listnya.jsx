@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import TrashIcon from './TrashIcon'
-import { ListContext } from '../../context/MenuContext'
+import { ListContext } from '../../../context/MenuContext'
 
 const Listnya = () => {
     const { list, setList } = useContext(ListContext)

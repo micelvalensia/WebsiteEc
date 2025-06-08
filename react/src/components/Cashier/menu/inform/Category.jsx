@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { MenuContext } from '../../context/MenuContext';
+import { MenuContext } from '../../../context/MenuContext';
 
 const Category = () => {
     const { type, setType } = useContext(MenuContext); // Ambil state dari Context

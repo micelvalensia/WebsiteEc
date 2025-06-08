@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { createOrderan, money } from '../admin/function/Function';
-import { ListContext } from '../context/MenuContext';
+import { createOrderan, money } from '../../admin/function/Function';
+import { ListContext } from '../../context/MenuContext';
 import Swal from 'sweetalert2';
 
 const Total = () => {

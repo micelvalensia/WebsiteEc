@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/Cashier/navbar/Navbar";
 
 const MyLayout = ({children, active}) => {
     return (

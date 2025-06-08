@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { ListContext } from '../../context/MenuContext';
+import { ListContext } from '../../../context/MenuContext';
 import Swal from 'sweetalert2';
-import { money } from '../../admin/function/Function';
+import { money } from '../../../admin/function/Function';
 
 const Card = ({ teks, gambar, harga }) => {
   const { list, setList } = useContext(ListContext);

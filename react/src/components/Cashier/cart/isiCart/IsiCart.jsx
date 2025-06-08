@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Item from './item'
-import { ListContext } from '../../context/MenuContext'
+import { ListContext } from '../../../context/MenuContext'
 
 const IsiCart = () => {
   const { list } = useContext(ListContext)

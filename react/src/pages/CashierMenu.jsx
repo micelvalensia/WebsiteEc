@@ -1,7 +1,7 @@
 import React from "react";
 import MyLayout from "../layouts/layout";
-import Menus from "../components/menu/menus/Menus";
-import Inform from "../components/menu/inform/Inform";
+import Menus from "../components/Cashier/menu/menus/Menus";
+import Inform from "../components/Cashier/menu/inform/Inform";
 
 const MenuPage = () => {
     return (

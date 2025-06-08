@@ -1,7 +1,7 @@
 import React from "react";
 import MyLayout from "../layouts/layout";
-import Total from "../components/cart/Total";
-import IsiCart from "../components/cart/isiCart/IsiCart";
+import Total from "../components/Cashier/cart/Total";
+import IsiCart from "../components/Cashier/cart/isiCart/IsiCart";
 
 const CartPage = () => {
     return (

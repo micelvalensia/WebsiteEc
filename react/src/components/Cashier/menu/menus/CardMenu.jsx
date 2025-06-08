@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Card from './Card'
-import { money } from '../../admin/function/Function'
-import { MenuContext } from '../../context/MenuContext'
-import { getFood } from '../../../hooks/hooks'
-import LoadingMenu from '../../loading/LoadingMenu'
+import { MenuContext } from '../../../context/MenuContext'
+import { getFood } from '../../../../hooks/hooks'
+import LoadingMenu from '../../../loading/LoadingMenu'
 
 const CardMenu = () => {
     const { type } = useContext(MenuContext); 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ListContext } from '../../context/MenuContext';
+import { ListContext } from '../../../context/MenuContext';
 
 const Item = ({ gambar, nama, harga }) => {
   const { list, setList } = useContext(ListContext);
