@@ -1,11 +1,14 @@
 import React from "react";
 
+const Button = ({ diKlik, teks, warna, mousein }) => {
+  return (
+    <button
+      className={`${warna} rounded-xl py-1 px-4 text-white cursor-pointer hover:opacity-80`}
+      onClick={diKlik}
+    >
+      {teks}
+    </button>
+  );
+};
 
-const Button = () => {
-    const {diKlik, teks} = props;
-    return (
-        <button className="bg-blue-600 rounded-xl py-2 px-4 text-white" onClick={diKlik}>{teks}</button>
-    )
-}
-
-export default Button
+export default Button;

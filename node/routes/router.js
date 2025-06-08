@@ -7,11 +7,14 @@ import {
   getBuyer,
   getFood,
   getHistory,
+  getKitchenList,
   getOneFood,
   getSalesByFoodType,
   getTopFoods,
   getTotalIncome,
+  pendingOrder,
   updateFood,
+  updateStatusOrder,
   userLogin,
   verifyToken,
 } from "../controllers/userController.js";
@@ -38,7 +41,7 @@ router.get("/check-auth", verifyToken, authorizeRole("admin"), (req, res) => {
 });
 router.post("/addmenu", upload.single("gambar"), addFood);
 router.post("/delete/:id", deleteFood);
-router.post("/order", createOrder);
+router.post("/order", pendingOrder);
 router.get("/history", getHistory);
 router.post("/update/:id", upload.single("gambar"), updateFood);
 router.get("/topfoods", getTopFoods);
@@ -53,5 +56,7 @@ router.get(
     return res.json({ message: "Authenticated" });
   }
 );
+router.get("/listkitchen", getKitchenList);
+router.put("/update-status/:id", updateStatusOrder);
 
 export default router;

@@ -3,28 +3,27 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 export const money = (uang) => {
-  return uang.toLocaleString("id-ID")
-}
+  return uang.toLocaleString("id-ID");
+};
 
-export const createOrderan = async(nama, total, items) => {
+export const createOrderan = async (nama, list, total) => {
   try {
     const when = new Date();
     const formattedDate = when.toLocaleDateString("id-ID", {
       day: "2-digit",
       month: "long",
-      year: "numeric"
+      year: "numeric",
     });
-    const order = axios.post("http://localhost:8092/order", {
-      nama: nama,
+    const response = await axios.post("http://localhost:8092/order", {
+      namaPemesan: nama,
+      orderan: list,
       total: total,
       date: formattedDate,
-      items: items
-    })
-    Swal.fire('Berhasil!', 'Pesanan telah dikonfirmasi.', 'success').then(() => {
-      window.location.reload()
     });
+    console.log("Sukses:", response.data);
+    Swal.fire("Berhasil!", "Pesanan dikirim ke dapur!", "success");
   } catch (error) {
-    Swal.fire('Gagal!', error.response?.data?.message || 'Terjadi kesalahan.', 'error');
-    console.error(error);
+    console.error("Gagal:", error);
+    Swal.fire("Error", "Gagal menyimpan pesanan!", "error");
   }
-}
+};

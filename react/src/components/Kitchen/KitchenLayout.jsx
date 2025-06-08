@@ -1,15 +1,13 @@
-import React from 'react'
-import KitchenNav from './KitchenNav'
+import React from "react";
+import KitchenNav from "./KitchenNav";
 
-function KitchenLayout({children}) {
+function KitchenLayout({ children }) {
   return (
     <>
       <KitchenNav />
-      <div className="">
-        {children}
-      </div>
+      <div className="">{children}</div>
     </>
-  )
+  );
 }
 
-export default KitchenLayout
+export default KitchenLayout;

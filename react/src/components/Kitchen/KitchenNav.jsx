@@ -39,39 +39,16 @@ export function KitchenNav() {
   }, []);
 
   return (
-    <Navbar color="transparent" fullWidth>
+    <Navbar color="transparent" fullWidth className="bg-slate-800">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="#"
-          className="mr-4 cursor-pointer text-lg font-bold text-black"
+          className="mr-4 cursor-pointer text-lg font-bold text-white"
         >
-          Material Tailwind
+          Kitchen Dashboard
         </Typography>
-        <div className="hidden lg:block">
-          <NavList />
-        </div>
-        <Button color="gray" className="hidden lg:inline-block">
-          Sign in
-        </Button>
-        <IconButton
-          size="sm"
-          variant="text"
-          onClick={handleOpen}
-          className="ml-auto bg-slate-950 flex justify-center items-center text-white lg:hidden rounded-md p-2 hover:bg-slate-800 transition"
-          aria-label="Toggle menu"
-        >
-          <span className="font-extrabold w-full select-none">−</span>
-        </IconButton>
       </div>
-      <Collapse open={open}>
-        <div className="mt-2 rounded-xl bg-white py-2">
-          <NavList />
-          <Button className="mb-2" fullWidth>
-            Sign in
-          </Button>
-        </div>
-      </Collapse>
     </Navbar>
   );
 }

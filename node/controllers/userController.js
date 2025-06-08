@@ -159,6 +159,30 @@ const createOrder = async (req, res) => {
   }
 };
 
+const pendingOrder = async (req, res) => {
+  const { namaPemesan, orderan, date } = req.body;
+  const connection = db.promise();
+
+  try {
+    const query =
+      "INSERT INTO pending_orders (makanan, customer, jumlah, create_at, status) VALUES (?, ?, ?, ?, ?)";
+    for (let item of orderan) {
+      const [order] = await connection.execute(query, [
+        item.nama,
+        namaPemesan,
+        item.jumlah,
+        date,
+        "pending",
+      ]);
+    }
+
+    res.status(200).json({ message: "Order berhasil disimpan!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Gagal simpan orderan." });
+  }
+};
+
 const getHistory = async (req, res) => {
   const connection = db.promise();
   try {
@@ -247,8 +271,9 @@ const getBuyer = async (req, res) => {
 };
 
 const getTotalIncome = async (req, res) => {
+  const connection = db.promise();
+
   try {
-    const connection = db.promise();
     const [rows] = await connection.execute(
       "SELECT SUM(totalprice) AS total FROM payment_history"
     );
@@ -294,6 +319,85 @@ const getSalesByFoodType = async (req, res) => {
   }
 };
 
+const getKitchenList = async (req, res) => {
+  const connection = db.promise();
+  try {
+    const query = "SELECT * from pending_orders where status = 'pending'";
+    const [data] = await connection.execute(query);
+
+    res.status(200).json({ message: "Berhasil", data: data });
+  } catch (error) {
+    console.error("🔥 Error ambil data:", error.message);
+    res.status(500).json({ message: "Gagal ambil data", error: error.message });
+  }
+};
+
+const updateStatusOrder = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const connection = db.promise();
+
+  try {
+    // Update status di pending_orders
+    const updateQuery = "UPDATE pending_orders SET status = ? WHERE id = ?";
+    await connection.execute(updateQuery, [status, id]);
+
+    if (status === "ready") {
+      // Ambil data pending_orders dan harga dari tabel food
+      const [pendingRows] = await connection.execute(
+        `
+        SELECT po.*, f.harga 
+        FROM pending_orders po
+        JOIN food f ON po.makanan = f.makanan
+        WHERE po.id = ?
+        `,
+        [id]
+      );
+
+      if (pendingRows.length === 0) {
+        return res.status(404).json({
+          message:
+            "Data order tidak ditemukan atau makanan tidak ada di tabel food.",
+        });
+      }
+
+      const order = pendingRows[0];
+      const { customer, makanan, jumlah, harga } = order;
+      const total = jumlah * harga;
+      const when = new Date();
+      const formattedDate = when.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      // Insert ke payment_history
+      const [paymentResult] = await connection.execute(
+        "INSERT INTO payment_history (customer, totalprice, create_at) VALUES (?, ?, ?)",
+        [customer, total, formattedDate]
+      );
+
+      const paymentId = paymentResult.insertId;
+
+      // Insert ke order_items
+      await connection.execute(
+        "INSERT INTO order_items (payment_id, makanan, quantity) VALUES (?, ?, ?)",
+        [paymentId, makanan, jumlah]
+      );
+    }
+
+    res
+      .status(200)
+      .json({ message: "Status order berhasil diupdate dan data disimpan." });
+  } catch (error) {
+    console.error("Gagal merubah status order: ", error.message);
+    res.status(500).json({
+      message: "Gagal merubah status order.",
+      error: error.message,
+    });
+  }
+};
+
 export {
   getFood,
   getOneFood,
@@ -309,4 +413,7 @@ export {
   getTotalIncome,
   getSalesByFoodType,
   authorizeRole,
+  pendingOrder,
+  getKitchenList,
+  updateStatusOrder,
 };

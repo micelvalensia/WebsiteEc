@@ -1,57 +1,61 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { createOrderan, money } from '../../admin/function/Function';
-import { ListContext } from '../../context/MenuContext';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect, useState } from "react";
+import { createOrderan, money } from "../../admin/function/Function";
+import { ListContext } from "../../context/MenuContext";
+import Swal from "sweetalert2";
 
 const Total = () => {
   const { list } = useContext(ListContext);
   const [nama, setNama] = useState("");
 
   const hitungTotal = () => {
-    const totalHarga = list.reduce((sum, obj) => sum + (obj.harga * obj.jumlah), 0);
+    const totalHarga = list.reduce(
+      (sum, obj) => sum + obj.harga * obj.jumlah,
+      0
+    );
     const pajak = totalHarga * 0.1;
     const totalSemua = totalHarga + pajak;
+    console.log(list);
 
     return {
       total: money(totalHarga),
       pajak: money(pajak),
-      totalSemua: money(totalSemua)
+      totalSemua: money(totalSemua),
     };
   };
 
   const { total, pajak, totalSemua } = hitungTotal();
-  
+
   // Fungsi untuk menghapus titik
-const removeDots = (formattedMoney) => {
-  return formattedMoney.replace(/\./g, ''); // Menghapus titik (.) dari nilai
-};
+  const removeDots = (formattedMoney) => {
+    return formattedMoney.replace(/\./g, ""); // Menghapus titik (.) dari nilai
+  };
 
-// Fungsi untuk menampilkan di Swal.fire
-const formatMoneyDisplay = (money) => {
-  return money.toLocaleString('id-ID'); // Format angka dengan titik (misalnya 15000 => 15.000)
-};
+  // Fungsi untuk menampilkan di Swal.fire
+  const formatMoneyDisplay = (money) => {
+    return money.toLocaleString("id-ID"); // Format angka dengan titik (misalnya 15000 => 15.000)
+  };
 
-const handleConfirm = (e) => {
-  e.preventDefault();
+  const handleConfirm = (e) => {
+    e.preventDefault();
 
-  if (list.length === 0) {
+    if (list.length === 0) {
+      Swal.fire({
+        title: "Keranjang Kosong!",
+        text: "Kamu belum memesan apapun. Silakan pilih makanan/minuman dulu.",
+        icon: "warning",
+        confirmButtonText: "Oke, siap!",
+      });
+      return;
+    }
+
+    // Format total, pajak, dan totalSemua untuk tampilan di Swal (dengan titik)
+    const totalFormatted = formatMoneyDisplay(total);
+    const pajakFormatted = formatMoneyDisplay(pajak);
+    const totalSemuaFormatted = formatMoneyDisplay(totalSemua);
+
     Swal.fire({
-      title: 'Keranjang Kosong!',
-      text: 'Kamu belum memesan apapun. Silakan pilih makanan/minuman dulu.',
-      icon: 'warning',
-      confirmButtonText: 'Oke, siap!',
-    });
-    return;
-  }
-
-  // Format total, pajak, dan totalSemua untuk tampilan di Swal (dengan titik)
-  const totalFormatted = formatMoneyDisplay(total);
-  const pajakFormatted = formatMoneyDisplay(pajak);
-  const totalSemuaFormatted = formatMoneyDisplay(totalSemua);
-
-  Swal.fire({
-    title: 'Konfirmasi Pesanan',
-    html: `
+      title: "Konfirmasi Pesanan",
+      html: `
       <div style="text-align: left; font-size: 14px; font-family: Arial, sans-serif; line-height: 1.5;">
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
@@ -80,30 +84,30 @@ const handleConfirm = (e) => {
         </table>
       </div>
     `,
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: '<i class="fa fa-check"></i> Konfirmasi',
-    cancelButtonText: '<i class="fa fa-times"></i> Batal',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Kirim data ke backend dengan menghapus titik
-      const totalWithoutDots = removeDots(totalFormatted);
-      const pajakWithoutDots = removeDots(pajakFormatted);
-      const totalSemuaWithoutDots = removeDots(totalSemuaFormatted);
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: '<i class="fa fa-check"></i> Konfirmasi',
+      cancelButtonText: '<i class="fa fa-times"></i> Batal',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Kirim data ke backend dengan menghapus titik
+        const totalWithoutDots = removeDots(totalFormatted);
 
-      // Kirim data yang sudah diformat (tanpa titik) ke backend
-      createOrderan(nama, totalWithoutDots, list);
-    }
-  });
-};
+        // Kirim data yang sudah diformat (tanpa titik) ke backend
+        createOrderan(nama, list, totalWithoutDots);
+      }
+    });
+  };
 
-  
   return (
-    <div className='border w-full bg-white md:w-[35%] lg:w-[25%] max-h-[300px]'>
+    <div className="border w-full bg-white md:w-[35%] lg:w-[25%] max-h-[300px]">
       <form className="flex flex-col p-5" onSubmit={handleConfirm}>
-        <h3 className='font-medium text-center text-lg'>Total Orderan</h3>
+        <h3 className="font-medium text-center text-lg">Total Orderan</h3>
         <div className="mt-3 flex items-center gap-2">
-          <label className="text-gray-700 text-sm font-bold mb-2" htmlFor="nama">
+          <label
+            className="text-gray-700 text-sm font-bold mb-2"
+            htmlFor="nama"
+          >
             Nama:
           </label>
           <input
@@ -116,27 +120,31 @@ const handleConfirm = (e) => {
           />
         </div>
         <div className="flex justify-between">
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Orderan:</h4>
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>{list.length}</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Orderan:</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">
+            {list.length}
+          </h4>
         </div>
         <div className="flex justify-between">
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Harga:</h4>
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Rp{total}</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Harga:</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Rp{total}</h4>
         </div>
         <div className="flex justify-between">
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Pajak:</h4>
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Rp{pajak}</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Pajak:</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Rp{pajak}</h4>
         </div>
         <hr />
         <div className="flex justify-between mt-2">
-          <h4 className='text-gray-700 text-sm font-bold mb-2'>Total:</h4>
-          <h4 className='text-gray-700 text-sm font-bold mb-2 '>Rp{totalSemua}</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2">Total:</h4>
+          <h4 className="text-gray-700 text-sm font-bold mb-2 ">
+            Rp{totalSemua}
+          </h4>
         </div>
 
         <button
           type="submit"
           className={`text-md py-1 rounded-xl mt-5 cursor-pointer 
-          ${list.length === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-800 text-white'}`}
+          ${list.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-800 text-white"}`}
           disabled={list.length === 0}
         >
           Confirm
