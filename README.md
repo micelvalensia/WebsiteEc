@@ -9,7 +9,7 @@ Aplikasi pemesanan makanan berbasis web yang memungkinkan kasir untuk memesan ma
 ### Kasir:
 - Melihat daftar menu makanan
 - Memesan makanan dengan mengisi data seperti jenis dan jumlah
-- User-friendly interface dengan tampilan responsive
+- User-friendly interface dengan tampilan minimalis
 
 ### Admin:
 - Melihat daftar pesanan dari pelanggan
@@ -23,7 +23,7 @@ Aplikasi pemesanan makanan berbasis web yang memungkinkan kasir untuk memesan ma
 
 ## 🛠️ Teknologi
 
-- **Frontend**: React.js, CSS (bisa pakai Tailwind atau lainnya)
+- **Frontend**: React.js, Tailwindcss
 - **Backend**: Node.js, Express.js
 - **Database**: MySQL
 - **Penyimpanan data**: disimpan ke MySQL melalui API
