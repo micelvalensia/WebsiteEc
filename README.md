@@ -1,6 +1,6 @@
 # Food Casier App 🍔
 
-Aplikasi pemesanan makanan berbasis web yang memungkinkan kasir untuk memesan makanan, dan datanya akan tersimpan otomatis di sistem admin. Dibangun menggunakan **React.js** untuk frontend dan **Node.js + Express.js** untuk backend, serta menggunakan **MySQL** sebagai database.
+Aplikasi pemesanan makanan berbasis web yang memungkinkan kasir untuk memesan makanan, dan akan diproses di kitchen ,dan datanya akan tersimpan otomatis di sistem admin. Dibangun menggunakan **React.js** untuk frontend dan **Node.js + Express.js** untuk backend, serta menggunakan **MySQL** sebagai database.
 
 ---
 
@@ -18,6 +18,10 @@ Aplikasi pemesanan makanan berbasis web yang memungkinkan kasir untuk memesan ma
 - Melihat top makanan paling sering dibeli
 - Bisa menghitung pendapatan
 - History Pembelian
+ 
+### Kitcen:
+- Melihat daftar menu yang dipesan
+- Mengubah status Menu
 
 ---
 
@@ -49,6 +53,13 @@ npm run dev
 
 ```
 dan masukkan file db ke database kalian
+note : untuk login admin ada di url localhost:port/admin/login 
+untuk kitchen ada di /kitchen/login dan untuk login admin itu 
+email: miceldoang@gmail.com
+password: miceldoang122
+dan untuk login kitchen
+email: juliankitchen@gmail.com
+password: 12345678
 
 ---
 
