@@ -74,5 +74,8 @@ password: 12345678
 ### Halaman Cart
 ![cart](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/cart.png)
 
+### Halaman Kitchen
+![cart](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/kitchen.png)
+
 ### Halaman Dashboard Admin
 ![dashboard](https://raw.githubusercontent.com/micelvalensia/WebsiteEc/main/react/src/assets/dashboard.png)
